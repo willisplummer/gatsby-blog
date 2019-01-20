@@ -42,7 +42,7 @@ const SEO = ({ meta, image, title, description, slug, lang = 'en' }: PropsType):
                 title,
               }
             : {
-                title: `${siteMetadata.title} — A blog by Dan Abramov`,
+                title: `${siteMetadata.title} — Willis Plummer's blog`,
               })}
           meta={[
             {
