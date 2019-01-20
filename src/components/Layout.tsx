@@ -1,12 +1,27 @@
 import React from 'react';
 import { Link } from 'gatsby';
+// @ts-ignore
 import Toggle from './Toggle';
 
 import { rhythm, scale } from '../utils/typography';
-import sun from '../assets/sun.png';
-import moon from '../assets/moon.png';
+import * as sun from '../assets/sun.png';
+import * as moon from '../assets/moon.png';
 
-class Layout extends React.Component {
+type PropsType = {
+  location: { pathname: string },
+  title: string,
+}
+
+type StateType = {
+  theme: string | null
+}
+
+declare global {
+  interface Window { __onThemeChange: any, __theme: any, __setPreferredTheme: any }
+}
+
+
+class Layout extends React.Component<PropsType, StateType> {
   state = {
     theme: null,
   };
@@ -18,6 +33,7 @@ class Layout extends React.Component {
   }
   renderHeader() {
     const { location, title } = this.props;
+    // @ts-ignore
     const rootPath = `${__PATH_PREFIX__}/`;
 
     if (location.pathname === rootPath) {
@@ -67,7 +83,8 @@ class Layout extends React.Component {
   }
   render() {
     const { children, location } = this.props;
-    const rootPath = `${__PATH_PREFIX__}/`;
+    // @ts-ignore
+    const rootPath: string = `${__PATH_PREFIX__}/`;
     const isHomePage = location.pathname === rootPath;
     // Keep dark/light mode switch aligned between home and post page
     // Does this make sense? No.
@@ -116,7 +133,7 @@ class Layout extends React.Component {
                   ),
                 }}
                 checked={this.state.theme === 'dark'}
-                onChange={e =>
+                onChange={(e: any) =>
                   window.__setPreferredTheme(
                     e.target.checked ? 'dark' : 'light'
                   )

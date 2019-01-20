@@ -1,15 +1,13 @@
 module.exports = {
   siteMetadata: {
-    title: 'Overreacted',
-    author: 'Dan Abramov',
-    description: 'Personal blog by Dan Abramov. I explain with words and code.',
-    siteUrl: 'https://overreacted.io',
-    social: {
-      twitter: '@dan_abramov',
-    },
+    title: 'Gatsby Blog',
+    author: 'Willis Plummer',
+    description: "Personal blog forked from Dan Abramov's",
+    siteUrl: 'https://willisplummer.com',
   },
   pathPrefix: '/',
   plugins: [
+    `gatsby-plugin-typescript`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {

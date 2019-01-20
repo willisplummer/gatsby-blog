@@ -8,8 +8,8 @@
 // https://discuss.httparchive.org/t/what-are-the-invalid-uses-of-the-lang-attribute/1022
 
 // Please keep keys lowercase!
-export const codeToLanguage = code =>
-  ({
+export const codeToLanguage = (code: string): string => {
+  const languageMap: {[s: string]: string} = {
     en: 'English',
     ru: 'Русский',
     tr: 'Türkçe',
@@ -25,21 +25,16 @@ export const codeToLanguage = code =>
     hu: 'Magyar',
     vi: 'Tiếng Việt',
     th: 'ไทย',
-  }[code]);
+  }
 
-export const loadFontsForCode = code => {
+  return (languageMap[code]);
+}
+
+export const loadFontsForCode = (code: string) => {
   switch (code) {
     case 'ru':
     case 'bg':
-      import('../fonts/fonts-shared.cyrillic.css');
-      import('../fonts/fonts-post.cyrillic.css');
-      break;
     case 'uk':
-      import('../fonts/fonts-shared.cyrillic.css');
-      import('../fonts/fonts-post.cyrillic.css');
-      import('../fonts/fonts-shared.latin-ext.css');
-      import('../fonts/fonts-post.latin-ext.css');
-      break;
     case 'cs':
     case 'da':
     case 'de':
@@ -55,19 +50,13 @@ export const loadFontsForCode = code => {
     case 'sq':
     case 'sv':
     case 'tr':
-      import('../fonts/fonts-shared.latin-ext.css');
-      import('../fonts/fonts-post.latin-ext.css');
-      break;
     case 'vi':
-      import('../fonts/fonts-shared.vietnamese.css');
-      import('../fonts/fonts-post.vietnamese.css');
-      break;
     default:
       break;
   }
 };
 
-export const createLanguageLink = (slug, lang) => {
+export const createLanguageLink = (slug: string, lang: string): ((targetLang: string) => string) => {
   const rawSlug = slug.replace(`${lang}/`, '');
 
   return targetLang =>
