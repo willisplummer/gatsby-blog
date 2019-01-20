@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Blog',
+    title: 'The Compiler Is My Copilot',
     author: 'Willis Plummer',
     description: "Personal blog forked from Dan Abramov's",
     siteUrl: 'https://willisplummer.com',
