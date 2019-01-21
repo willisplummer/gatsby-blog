@@ -96,6 +96,7 @@ class Layout extends React.Component<PropsType, StateType> {
           color: 'var(--textNormal)',
           background: 'var(--bg)',
           transition: 'color 0.2s ease-out, background 0.2s ease-out',
+          minHeight: '100vh',
         }}
       >
         <div
