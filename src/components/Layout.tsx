@@ -7,6 +7,9 @@ import { rhythm, scale } from '../utils/typography';
 import * as sun from '../assets/sun.png';
 import * as moon from '../assets/moon.png';
 
+// @ts-ignore
+const rootPath = `${__PATH_PREFIX__}/`;
+
 type PropsType = {
   location: { pathname: string },
   title: string,
@@ -33,8 +36,6 @@ class Layout extends React.Component<PropsType, StateType> {
   }
   renderHeader() {
     const { location, title } = this.props;
-    // @ts-ignore
-    const rootPath = `${__PATH_PREFIX__}/`;
 
     if (location.pathname === rootPath) {
       return (
@@ -83,8 +84,6 @@ class Layout extends React.Component<PropsType, StateType> {
   }
   render() {
     const { children, location } = this.props;
-    // @ts-ignore
-    const rootPath: string = `${__PATH_PREFIX__}/`;
     const isHomePage = location.pathname === rootPath;
     // Keep dark/light mode switch aligned between home and post page
     // Does this make sense? No.
