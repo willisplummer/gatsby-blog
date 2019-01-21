@@ -152,7 +152,7 @@ class BlogPostTemplate extends React.Component {
             }}
             to={'/'}
           >
-            Overreacted
+            {siteTitle}
           </Link>
         </h3>
         <Bio />
