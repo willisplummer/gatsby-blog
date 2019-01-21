@@ -2,10 +2,10 @@
 title: All the cultural references in Julie Hecht's fiction
 date: '2018-01-21'
 langs: ['en']
-spoiler: A list of movies, books, music that the narrator talks about.
+spoiler: A list of movies, books, music, etc. that mentioned by the narrator of Do The Windows Open?, The Unprofessionals, and Happy Trails To You
 ---
 
-This is a chronological list of cultural references that the narrator makes in Julie Hecht's three connected works of fiction. The original reason I thought to do this is that I had enjoyed reading her work so much that I thought it might be a nice way to feel more immersed if I read, watched, listened to, or at least looked up all of the other art that she references.
+This is a chronological list of cultural references that the narrator makes in Julie Hecht's three connected works of fiction Do The Windows Open?, The Unprofessionals, and Happy Trails To You. The original reason I thought to do this is that I had enjoyed reading her work so much that I thought it might be a nice way to feel more immersed if I read, watched, listened to, or at least looked up all of the other art that she references.
 
 My methodology got kind of a haphazard and I ended up including historical figures that I already knew about and didn't include the names of restaurants, foods, fashion brands, types of cars, geographic locales, etc. I also decided that I wouldn't list recurrences in the same short story or novel but I would repeat them if they appeared in two separate stories or books, though I'm not sure what good it does to include the repetitions beyond getting a sense for how frequently certain works or people appear in her writing.
 
@@ -155,3 +155,5 @@ I might have missed some things too. Let me know if you find something that I ov
 - [Selected Works of Thoreau](https://books.google.com/books/about/The_Selected_Works_of_Thoreau.html?id=gMcOnQAACAAJ)
 - [Jacqueline Kennedy](https://en.wikipedia.org/wiki/Jacqueline_Kennedy_Onassis)
 - [Natural Health, Natural Medicine by Andrew Weil](https://en.wikipedia.org/wiki/Andrew_Weil)
+
+## The Unprofessionals
