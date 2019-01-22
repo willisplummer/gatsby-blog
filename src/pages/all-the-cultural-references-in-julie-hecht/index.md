@@ -157,3 +157,153 @@ I might have missed some things too. Let me know if you find something that I ov
 - [Natural Health, Natural Medicine by Andrew Weil](https://en.wikipedia.org/wiki/Andrew_Weil)
 
 ## The Unprofessionals
+
+- Peter Pan
+- Casper The Friendly Ghost
+- Spellbound
+- Patrick Buchanan
+- David Letterman
+- [Pinnacle](https://en.wikipedia.org/wiki/Pinnacle_(TV_program))
+- Michio Kushi
+- 9/11
+- Marilyn Monroe
+- [It's a Gift](https://www.imdb.com/title/tt0025318/)
+- Johnny Carson
+- Sonny Bono
+- Ulysses
+- Under Milk Wood
+- De Boll Weevil
+- Thelma Ritter
+- Elvis Presley
+- "Great Balls of Fire" by Jerry Lee Lewis
+- [The Member of the Wedding by Carson McCullers](https://en.wikipedia.org/wiki/The_Member_of_the_Wedding)
+- Fawlty Towers
+- [Anger Kills](https://www.penguinrandomhouse.com/books/191382/anger-kills-by-redford-williams-md-author-of-the-trusting-heart-and-virginia-williams-phd/9780307818782/)
+- [Something Happened by Joseph Heller](https://en.wikipedia.org/wiki/Something_Happened)
+- [A Mother's Kisses by Bruce Jay Friedman](https://press.uchicago.edu/ucp/books/book/chicago/M/bo3637654.html)
+- The Larry Sanders Show
+- Barbara Stanwick movie from the 1940's
+- D.O.A
+- Double Indemnity
+- I Married A Dead Man
+- Christmas in Connecticut
+- Healing Mudras: Yoga for your hands
+- Beowulf
+- "Get off of my cloud" by the Rolling Stones
+- Catch-22
+- Keith Richards
+- Chubby Checker
+- Fabian
+- Earth Versus the spider-man, war of the collosul beasts (these might be fictional)
+- "The Bourgeois Blues"
+- Hollywood Crime
+- SCTV
+- Mind Over Back Pain
+- Casablanca
+- Martha Stewart
+- "Buñulesque"
+- Rear Window
+- The Guggenheim Museum
+- The Stranger
+- Mel Tormé
+- Alfred Hitchcock
+- Dr. Andrew Weil
+- Foucault
+- Bob Dylan
+- Joan Baez
+- Rick Moranis
+- Joseph Lieberman
+- Alfred E. Neuman
+- Jeff Chandler
+- Lyle Lovett
+- John Belushi
+- Marianne Faithful
+- Groucho Marx
+- Boys' Life
+- Brigadoon
+- Alan Sherman's Biography
+- Robert De Niro
+- Christiane Amanpour
+- Martha Stewart
+- Emily Dickinson
+- Elvis Presley
+- Georgia O'Keeffe
+- Rachel Carson
+- Eudora Welty
+- Greta Van Susteren
+- Salman Rushdie
+- No Exit (play)
+- Ozzie and Harriet
+- I love lucy
+- Nietzsche
+- Nietzche's Last Days
+- The Beatles
+- Rubber Soul
+- Schopenhauer
+- Spinoza
+- Norman Vincent Peale
+- Freud
+- [British Butterflies (an antique butterfly book)](http://thepurplecaravan.blogspot.com/2011/07/times-they-are-changing.html)
+- Joyce Kilmer
+- John Candy
+- Heartbreak Hotel
+- the George Burns and Gracie Allen Show
+- Rock Hudson
+- Jane Wyman
+- Shadow of a Doubt
+- It's a Wonderful Life
+- Alfred Hitchcock
+- The Stranger
+- Elspeth Alley
+- Brian Wilson
+- JFK
+- Robert Kennedy
+- Rope
+- Letitia Baldrige's Complete Guide to Executive Manners
+- Vegetarian Times
+- Paul Newman
+- Dan Akroyd
+- Saturday Night Live
+- Jeff Chandler
+- Edie Beale
+- Men Are From Mars
+- Marcel Proust
+- [The Birthday Party](https://en.wikipedia.org/wiki/The_Birthday_Party_(play))
+- Buddy Holly
+- Roy Orbison
+- Ricky Nelson
+- John Lennon
+- Otis Redding
+- Peter Sellers
+- Andy Kaufman
+- Princess Diana
+- Joseph Heller
+- The Discreet Charm of the Bourgeoisie
+- Albert Camus
+- Dr. Ruth Westheimer
+- Sean Connery
+- The Rime of the Ancient Mariner
+- Robert Walser
+- Walter Benjamin
+- Macbeth
+- Yves Saint Laurent
+- Karl Lagerfield
+- Sonia Rykiel
+- Valentino
+- Ungaro
+- Versace
+- Paul Schaffer
+- Cher
+- The Ed Sullivan Show
+- The Red Shoes
+- Michael Powell
+- Keats
+- Wordsworth
+- Percy Bysshe Shelley
+- William Robinson
+- Gertrude Jekyll
+- Wallace Nutting
+- Frederick Law Olmstead
+- Gene Kelly
+- [Ernest Shackleton](https://en.wikipedia.org/wiki/Ernest_Shackleton)
+- [Blanche DuBois](https://en.wikipedia.org/wiki/Blanche_DuBois)
