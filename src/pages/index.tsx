@@ -55,7 +55,10 @@ const BlogIndex = ({ data, location }: PropsType): JSX.Element => {
               {node.frontmatter.date}
               {` • ${formatReadingTime(node.timeToRead)}`}
             </small>
-            <p dangerouslySetInnerHTML={{ __html: node.frontmatter.spoiler }} />
+            <p
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: node.frontmatter.spoiler }}
+            />
           </div>
         );
       })}

@@ -14,7 +14,7 @@ const Confirm = ({
       siteMetadata: { title: siteTitle },
     },
   },
-}: PropsType) => (
+}: PropsType): JSX.Element => (
   <Layout location={location} title={siteTitle}>
     <h1>Just one more thing...</h1>
     <p>
