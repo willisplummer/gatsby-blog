@@ -4,9 +4,11 @@ import get from 'lodash/get';
 
 import '../fonts/fonts-post.css';
 import Bio from '../components/Bio';
+import Translations from '../components/Translations';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 // import Signup from '../components/Signup';
+import systemFont from '../constants/system-font';
 import { formatReadingTime } from '../utils/helpers';
 import { rhythm, scale } from '../utils/typography';
 import {
@@ -17,63 +19,6 @@ import {
 
 const GITHUB_USERNAME = 'willisplummer';
 const GITHUB_REPO_NAME = 'gatsby-blog';
-const systemFont = `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif`;
-
-interface TranslationsPropsType {
-  translations: any;
-  lang: any;
-  languageLink: any;
-  editUrl: string;
-}
-
-const Translations = ({
-  translations,
-  lang,
-  languageLink,
-  editUrl,
-}: TranslationsPropsType): JSX.Element => (
-  <p
-    style={{
-      fontSize: '0.9em',
-      border: '1px solid var(--hr)',
-      borderRadius: '0.75em',
-      padding: '0.75em',
-      background: 'var(--inlineCode-bg)',
-      // Use system font to avoid loading extra glyphs for language names
-      fontFamily: systemFont,
-    }}
-  >
-    {translations.length > 0 && (
-      <span>
-        <span>Translations by readers: </span>
-        {translations.map((l: string, i: number) => (
-          <React.Fragment key={l}>
-            {l === lang ? (
-              <b>{codeToLanguage(l)}</b>
-            ) : (
-              <Link to={languageLink(l)}>{codeToLanguage(l)}</Link>
-            )}
-            {i === translations.length - 1 ? '' : ' • '}
-          </React.Fragment>
-        ))}
-      </span>
-    )}
-    {lang !== 'en' && (
-      <>
-        <br />
-        <br />
-        <Link to={languageLink('en')}>Read</Link>
-        {' the original or '}
-        <a href={editUrl} target="_blank" rel="noopener noreferrer">
-          improve
-        </a>{' '}
-        this translation.
-      </>
-    )}
-  </p>
-);
 
 interface PropsType {
   data: any;
