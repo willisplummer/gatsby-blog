@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
  * Copyright (c) 2015 instructure-react
  * Forked from https://github.com/aaronshaf/react-toggle/

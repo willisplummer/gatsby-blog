@@ -8,6 +8,7 @@
     "url": "https://github.com/willisplummer/gatsby-blog/issues"
   },
   "dependencies": {
+    "@babel/core": "^7.2.2",
     "@types/lodash": "^4.14.120",
     "@types/node": "^10.12.18",
     "@types/react": "^16.7.20",
@@ -45,7 +46,15 @@
     "typography-theme-wordpress-2016": "^0.15.10"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
+    "@typescript-eslint/eslint-plugin": "^1.1.0",
+    "@typescript-eslint/parser": "^1.1.0",
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.6.0",
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-jsx-a11y": "^6.2.0",
+    "eslint-plugin-prefer-object-spread": "^1.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.11.1",
     "gh-pages": "^2.0.1",
     "prettier": "^1.14.2",
@@ -58,12 +67,12 @@
   "license": "MIT",
   "scripts": {
     "dev": "gatsby develop",
-    "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-pattern public .",
+    "lint": "yarn eslint src/",
     "format": "prettier --write '{gatsby-*.js,src/**/*.{js,jsx,json,css,ts,tsx}}'",
     "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check -- --watch",
+    "type-check:watch": "yarn run type-check -- --watch",
     "develop": "gatsby develop",
-    "start": "npm run develop",
+    "start": "yarn run develop",
     "build": "rm -rf public && rm -rf .cache && gatsby build",
     "deploy": "typecheck && yarn build && gh-pages -d public"
   },
