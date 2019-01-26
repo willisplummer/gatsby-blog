@@ -89,7 +89,7 @@ const SEO = ({
                     content: metaImage,
                   },
                 ]
-              : [],
+              : []
           )}
         />
       );

@@ -49,10 +49,10 @@ const BlogPostTemplate = ({
   const siteTitle = get(data, 'site.siteMetadata.title');
   const lang = post.fields.langKey;
   const translations = (post.frontmatter.langs || []).filter(
-    (l: string) => l !== 'en',
+    (l: string) => l !== 'en'
   );
   translations.sort((a: string, b: string) =>
-    codeToLanguage(a) < codeToLanguage(b) ? -1 : 1,
+    codeToLanguage(a) < codeToLanguage(b) ? -1 : 1
   );
 
   loadFontsForCode(lang);
@@ -60,10 +60,10 @@ const BlogPostTemplate = ({
   const enSlug = languageLink('en');
   const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src/pages/${enSlug.slice(
     1,
-    enSlug.length - 1,
+    enSlug.length - 1
   )}/index${lang === 'en' ? '' : `.${lang}`}.md`;
   const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `https://willisplummer.com${enSlug}`,
+    `https://willisplummer.com${enSlug}`
   )}`;
   return (
     <Layout location={location} title={siteTitle}>

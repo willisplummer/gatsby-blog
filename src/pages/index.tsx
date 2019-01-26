@@ -47,7 +47,7 @@ interface PropsType {
 const BlogIndex = ({ data, location }: PropsType): JSX.Element => {
   const siteTitle: string = get(data, 'site.siteMetadata.title', '');
   const posts: PostType[] = get(data, 'allMarkdownRemark.edges').filter(
-    ({ node }: PostType) => node.fields.langKey === 'en',
+    ({ node }: PostType) => node.fields.langKey === 'en'
   );
 
   return (
