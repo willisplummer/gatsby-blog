@@ -75,7 +75,7 @@
     "develop": "gatsby develop",
     "start": "yarn run develop",
     "build": "rm -rf public && rm -rf .cache && gatsby build",
-    "deploy": "typecheck && yarn build && gh-pages -d public"
+    "deploy": "yarn run lint && yarn run typecheck && yarn build && gh-pages -d public"
   },
   "husky": {
     "hooks": {
