@@ -114,7 +114,7 @@ class Layout extends React.Component<PropsType, StateType> {
             padding: `${topPadding} ${rhythm(3 / 4)}`,
           }}
         >
-          <div
+          <header
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -149,7 +149,7 @@ class Layout extends React.Component<PropsType, StateType> {
             ) : (
               <div style={{ height: '24px' }} />
             )}
-          </div>
+          </header>
           {children}
         </div>
       </div>

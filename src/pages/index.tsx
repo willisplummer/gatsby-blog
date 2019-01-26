@@ -35,33 +35,37 @@ const BlogIndex = ({ data, location }: PropsType): JSX.Element => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO meta={[]} />
-      <Bio />
-      {posts.map(({ node }: PostType) => {
-        const title = get(node, 'frontmatter.title') || node.fields.slug;
-        return (
-          <div key={node.fields.slug}>
-            <h3
-              style={{
-                fontFamily: 'Montserrat, sans-serif',
-                fontSize: rhythm(1),
-                marginBottom: rhythm(1 / 4),
-              }}
-            >
-              <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
-                {title}
-              </Link>
-            </h3>
-            <small>
-              {node.frontmatter.date}
-              {` • ${formatReadingTime(node.timeToRead)}`}
-            </small>
-            <p
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{ __html: node.frontmatter.spoiler }}
-            />
-          </div>
-        );
-      })}
+      <aside>
+        <Bio />
+      </aside>
+      <main>
+        {posts.map(({ node }: PostType) => {
+          const title = get(node, 'frontmatter.title') || node.fields.slug;
+          return (
+            <div key={node.fields.slug}>
+              <h3
+                style={{
+                  fontFamily: 'Montserrat, sans-serif',
+                  fontSize: rhythm(1),
+                  marginBottom: rhythm(1 / 4),
+                }}
+              >
+                <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
+                  {title}
+                </Link>
+              </h3>
+              <small>
+                {node.frontmatter.date}
+                {` • ${formatReadingTime(node.timeToRead)}`}
+              </small>
+              <p
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: node.frontmatter.spoiler }}
+              />
+            </div>
+          );
+        })}
+      </main>
       <Footer />
     </Layout>
   );

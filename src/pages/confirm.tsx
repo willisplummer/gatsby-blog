@@ -16,11 +16,13 @@ const Confirm = ({
   },
 }: PropsType): JSX.Element => (
   <Layout location={location} title={siteTitle}>
-    <h1>Just one more thing...</h1>
-    <p>
-      Thank you for subscribing. You will need to check your inbox and confirm
-      your subscription.
-    </p>
+    <main>
+      <h1>Just one more thing...</h1>
+      <p>
+        Thank you for subscribing. You will need to check your inbox and confirm
+        your subscription.
+      </p>
+    </main>
   </Layout>
 );
 

@@ -12,11 +12,13 @@ const Thanks = ({ location, data }: PropsType): JSX.Element => {
   const siteTitle = get(data, 'site.siteMetadata.title');
   return (
     <Layout location={location} title={siteTitle}>
-      <h1>Thank you for subscribing.</h1>
-      <p>
-        You are now confirmed. You can expect to receive emails as I create new
-        content.
-      </p>
+      <main>
+        <h1>Thank you for subscribing.</h1>
+        <p>
+          You are now confirmed. You can expect to receive emails as I create
+          new content.
+        </p>
+      </main>
     </Layout>
   );
 };
