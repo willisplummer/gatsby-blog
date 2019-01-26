@@ -20,20 +20,33 @@ import {
 const GITHUB_USERNAME = 'willisplummer';
 const GITHUB_REPO_NAME = 'gatsby-blog';
 
+interface PageDataType {
+  html: string;
+  timeToRead: number;
+  fields: { langKey: string; slug: string };
+  frontmatter: {
+    langs: string[];
+    title: string;
+    date: string;
+    spoiler: string;
+  };
+}
+
 interface PropsType {
-  data: any;
-  pageContext: { previous: any; next: any; slug: string };
-  location: any;
+  data: {
+    markdownRemark: PageDataType;
+  };
+  pageContext: { previous?: PageDataType; next?: PageDataType; slug: string };
+  location: { pathname: string };
 }
 
 const BlogPostTemplate = ({
   data,
-  pageContext,
+  pageContext: { previous, next, slug },
   location,
 }: PropsType): JSX.Element => {
   const post = data.markdownRemark;
   const siteTitle = get(data, 'site.siteMetadata.title');
-  const { previous, next, slug } = pageContext;
   const lang = post.fields.langKey;
   const translations = (post.frontmatter.langs || []).filter(
     (l: string) => l !== 'en',
