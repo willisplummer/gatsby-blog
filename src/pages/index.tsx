@@ -37,7 +37,7 @@ const BlogIndex = (props: PropsType) => {
 
   return (
     <Layout location={props.location} title={siteTitle}>
-      <SEO meta={[]}/>
+      <SEO meta={[]} />
       <Bio />
       {posts.map(({ node }: PostType) => {
         const title = get(node, 'frontmatter.title') || node.fields.slug;
