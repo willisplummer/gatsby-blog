@@ -59,7 +59,7 @@ export const loadFontsForCode = (code: string) => {
 export const createLanguageLink = (
   slug: string,
   lang: string
-): ((targetLang: string) => string) => {
+): (targetLang: string) => string => {
   const rawSlug = slug.replace(`${lang}/`, '');
 
   return targetLang =>
