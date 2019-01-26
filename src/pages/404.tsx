@@ -6,7 +6,7 @@ interface PropsType {
 }
 
 const NotFoundPage = ({ location }: PropsType): JSX.Element => (
-  <Layout title="The Compiler Is My Copilot" location={location}>
+  <Layout title="Willis Plummer Development Blog" location={location}>
     <h1>Not Found</h1>
     <p>I haven’t written this post yet. Will you help me write it?</p>
     <iframe

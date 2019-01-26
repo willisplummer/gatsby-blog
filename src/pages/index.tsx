@@ -23,7 +23,25 @@ interface PostType {
 
 interface PropsType {
   location: { pathname: string };
-  data: any;
+  data: {
+    site: { siteMetadata: { title: string } };
+    allMarkdownRemark: {
+      edges: {
+        node: {
+          fields: {
+            slug: string;
+            langKey: string;
+          };
+          timeToRead: number;
+          frontmatter: {
+            date: string;
+            title: string;
+            spoiler: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 const BlogIndex = ({ data, location }: PropsType): JSX.Element => {
@@ -34,7 +52,7 @@ const BlogIndex = ({ data, location }: PropsType): JSX.Element => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO meta={[]} />
+      <SEO />
       <aside>
         <Bio />
       </aside>

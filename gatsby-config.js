@@ -1,8 +1,10 @@
+/* eslint-disable */
+
 module.exports = {
   siteMetadata: {
-    title: 'The Compiler Is My Copilot',
+    title: 'Willis Plummer Dev Blog',
     author: 'Willis Plummer',
-    description: "Personal blog forked from Dan Abramov's",
+    description: "Dev blog forked from Dan Abramov's",
     siteUrl: 'https://blog.willisplummer.com',
   },
   pathPrefix: '/',
@@ -118,7 +120,7 @@ module.exports = {
               }
             `,
             output: '/rss.xml',
-            title: "Willis Plummer's Blog RSS Feed",
+            title: 'Willis Plummer Dev Blog RSS Feed',
           },
         ],
       },
@@ -126,8 +128,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Willis Plummer Blog`,
-        short_name: `Willis Plummer Blog`,
+        name: `Willis Plummer Dev Blog`,
+        short_name: `Willis Plummer Dev Blog`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#ffa7c4`,

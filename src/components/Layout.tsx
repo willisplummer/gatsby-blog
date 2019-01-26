@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Link } from 'gatsby';
+// TODO
 // @ts-ignore
 import Toggle from './Toggle';
 
@@ -9,8 +10,11 @@ import { rhythm, scale } from '../utils/typography';
 import * as sun from '../assets/sun.png';
 import * as moon from '../assets/moon.png';
 
+// TODO
 // @ts-ignore
 const rootPath = `${__PATH_PREFIX__}/`;
+
+type ThemeType = 'dark' | 'light';
 
 interface PropsType {
   location: { pathname: string };
@@ -18,14 +22,14 @@ interface PropsType {
 }
 
 interface StateType {
-  theme: string | null;
+  theme: ThemeType | null;
 }
 
 declare global {
   interface Window {
-    onThemeChange: any;
-    theme: any;
-    setPreferredTheme: any;
+    onThemeChange(): void;
+    theme: ThemeType;
+    setPreferredTheme(theme: ThemeType): void;
   }
 }
 
@@ -142,7 +146,9 @@ class Layout extends React.Component<PropsType, StateType> {
                   ),
                 }}
                 checked={theme === 'dark'}
-                onChange={(e: any) =>
+                onChange={(e: React.MouseEvent<HTMLInputElement>) =>
+                  // TODO
+                  // @ts-ignore
                   window.setPreferredTheme(e.target.checked ? 'dark' : 'light')
                 }
               />

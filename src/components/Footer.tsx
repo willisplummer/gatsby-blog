@@ -21,6 +21,13 @@ const Footer = (): JSX.Element => (
     >
       github
     </a>{' '}
+    <a
+      href="https://willisplummer.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      website
+    </a>{' '}
   </footer>
 );
 

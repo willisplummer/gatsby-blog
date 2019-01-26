@@ -16,7 +16,6 @@ const query = graphql`
 `;
 
 interface PropsType {
-  meta: any[];
   image?: string;
   title?: string;
   description?: string;
@@ -25,11 +24,10 @@ interface PropsType {
 }
 
 const SEO = ({
-  meta,
   image,
-  title,
+  title = '',
   description,
-  slug,
+  slug = '',
   lang = 'en',
 }: PropsType): JSX.Element => (
   <StaticQuery
@@ -48,7 +46,7 @@ const SEO = ({
                 title,
               }
             : {
-                title: `${siteMetadata.title} — Willis Plummer's blog`,
+                title: `${siteMetadata.title} — Willis Plummer blog`,
               })}
           meta={[
             {
@@ -79,32 +77,24 @@ const SEO = ({
               name: 'twitter:description',
               content: metaDescription,
             },
-          ]
-            .concat(
-              metaImage
-                ? [
-                    {
-                      property: 'og:image',
-                      content: metaImage,
-                    },
-                    {
-                      name: 'twitter:image',
-                      content: metaImage,
-                    },
-                  ]
-                : [],
-            )
-            .concat(meta)}
+          ].concat(
+            metaImage
+              ? [
+                  {
+                    property: 'og:image',
+                    content: metaImage,
+                  },
+                  {
+                    name: 'twitter:image',
+                    content: metaImage,
+                  },
+                ]
+              : [],
+          )}
         />
       );
     }}
   />
 );
-
-SEO.defaultProps = {
-  meta: [],
-  title: '',
-  slug: '',
-};
 
 export default SEO;

@@ -4,9 +4,9 @@ import systemFont from '../constants/system-font';
 import { codeToLanguage } from '../utils/i18n';
 
 interface TranslationsPropsType {
-  translations: any;
-  lang: any;
-  languageLink: any;
+  translations: string[];
+  lang: string;
+  languageLink(code: string): string;
   editUrl: string;
 }
 

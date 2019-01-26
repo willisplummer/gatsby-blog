@@ -1,12 +1,12 @@
 import React from 'react';
 
 interface PropsType {
-  htmlAttributes: Record<string, any>;
-  headComponents: any[];
-  bodyAttributes: Record<string, any>;
-  preBodyComponents: any[];
+  htmlAttributes: Record<string, string>;
+  headComponents: JSX.Element[];
+  bodyAttributes: Record<string, string>;
+  preBodyComponents: JSX.Element[];
   body: string;
-  postBodyComponents: any[];
+  postBodyComponents: JSX.Element[];
 }
 
 const HTML = ({
