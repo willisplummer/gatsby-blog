@@ -30,7 +30,7 @@ export const codeToLanguage = (code: string): string => {
   return languageMap[code];
 };
 
-export const loadFontsForCode = (code: string) => {
+export const loadFontsForCode = (code: string): void => {
   switch (code) {
     case 'ru':
     case 'bg':
@@ -56,10 +56,8 @@ export const loadFontsForCode = (code: string) => {
   }
 };
 
-export const createLanguageLink = (
-  slug: string,
-  lang: string
-): (targetLang: string) => string => {
+type ReturnType = (targetLang: string) => string;
+export const createLanguageLink = (slug: string, lang: string): ReturnType => {
   const rawSlug = slug.replace(`${lang}/`, '');
 
   return targetLang =>

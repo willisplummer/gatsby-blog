@@ -51,6 +51,7 @@
     "eslint": "^5.12.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.6.0",
+    "eslint-import-resolver-typescript": "^1.1.1",
     "eslint-plugin-import": "^2.15.0",
     "eslint-plugin-jsx-a11y": "^6.2.0",
     "eslint-plugin-prefer-object-spread": "^1.2.1",
@@ -61,13 +62,13 @@
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
-    "typescript": "^3.2.4"
+    "typescript": "3.2.1"
   },
   "homepage": "https://blog.willisplummer.com",
   "license": "MIT",
   "scripts": {
     "dev": "gatsby develop",
-    "lint": "yarn eslint src/",
+    "lint": "yarn eslint --ext .js,.jsx,.ts,.tsx src/",
     "format": "prettier --write '{gatsby-*.js,src/**/*.{js,jsx,json,css,ts,tsx}}'",
     "type-check": "tsc --noEmit",
     "type-check:watch": "yarn run type-check -- --watch",

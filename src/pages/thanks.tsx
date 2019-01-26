@@ -1,17 +1,17 @@
 import React from 'react';
-import Layout from '../components/Layout';
 import get from 'lodash/get';
 import { graphql } from 'gatsby';
+import Layout from '../components/Layout';
 
-type PropsType = {
+interface PropsType {
   location: any;
   data: any;
-};
+}
 
-const Thanks = (props: PropsType): JSX.Element => {
-  const siteTitle = get(props, 'data.site.siteMetadata.title');
+const Thanks = ({ location, data }: PropsType): JSX.Element => {
+  const siteTitle = get(data, 'site.siteMetadata.title');
   return (
-    <Layout location={props.location} title={siteTitle}>
+    <Layout location={location} title={siteTitle}>
       <h1>Thank you for subscribing.</h1>
       <p>
         You are now confirmed. You can expect to receive emails as I create new

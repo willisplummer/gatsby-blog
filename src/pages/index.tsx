@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 import { formatReadingTime } from '../utils/helpers';
 import { rhythm } from '../utils/typography';
 
-type PostType = {
+interface PostType {
   node: {
     fields: {
       title: string;
@@ -19,24 +19,21 @@ type PostType = {
     frontmatter: { date: string; spoiler: string };
     timeToRead: number;
   };
-};
-type PropsType = {
-  location: { pathname: string };
-};
+}
 
-const BlogIndex = (props: PropsType) => {
-  const siteTitle: string = get(props, 'data.site.siteMetadata.title', '');
-  const siteDescription: string = get(
-    props,
-    'data.site.siteMetadata.description',
-    ''
-  );
-  const posts: PostType[] = get(props, 'data.allMarkdownRemark.edges').filter(
-    ({ node }: PostType) => node.fields.langKey === 'en'
+interface PropsType {
+  location: { pathname: string };
+  data: any;
+}
+
+const BlogIndex = ({ data, location }: PropsType): JSX.Element => {
+  const siteTitle: string = get(data, 'site.siteMetadata.title', '');
+  const posts: PostType[] = get(data, 'allMarkdownRemark.edges').filter(
+    ({ node }: PostType) => node.fields.langKey === 'en',
   );
 
   return (
-    <Layout location={props.location} title={siteTitle}>
+    <Layout location={location} title={siteTitle}>
       <SEO meta={[]} />
       <Bio />
       {posts.map(({ node }: PostType) => {

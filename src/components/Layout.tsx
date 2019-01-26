@@ -1,3 +1,5 @@
+/* global __PATH_PREFIX__ */
+
 import React from 'react';
 import { Link } from 'gatsby';
 // @ts-ignore
@@ -10,20 +12,20 @@ import * as moon from '../assets/moon.png';
 // @ts-ignore
 const rootPath = `${__PATH_PREFIX__}/`;
 
-type PropsType = {
+interface PropsType {
   location: { pathname: string };
   title: string;
-};
+}
 
-type StateType = {
+interface StateType {
   theme: string | null;
-};
+}
 
 declare global {
   interface Window {
-    __onThemeChange: any;
-    __theme: any;
-    __setPreferredTheme: any;
+    onThemeChange: any;
+    theme: any;
+    setPreferredTheme: any;
   }
 }
 
@@ -31,13 +33,15 @@ class Layout extends React.Component<PropsType, StateType> {
   state = {
     theme: null,
   };
-  componentDidMount() {
-    this.setState({ theme: window.__theme });
-    window.__onThemeChange = () => {
-      this.setState({ theme: window.__theme });
+
+  componentDidMount(): void {
+    this.setState({ theme: window.theme });
+    window.onThemeChange = () => {
+      this.setState({ theme: window.theme });
     };
   }
-  renderHeader() {
+
+  renderHeader(): JSX.Element {
     const { location, title } = this.props;
 
     if (location.pathname === rootPath) {
@@ -55,38 +59,39 @@ class Layout extends React.Component<PropsType, StateType> {
               textDecoration: 'none',
               color: 'var(--textTitle)',
             }}
-            to={'/'}
+            to="/"
           >
             {title}
           </Link>
         </h1>
       );
-    } else {
-      return (
-        <h3
-          style={{
-            fontFamily: 'Montserrat, sans-serif',
-            marginTop: 0,
-            marginBottom: rhythm(-1),
-            minHeight: '3.5rem',
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: 'none',
-              textDecoration: 'none',
-              color: 'rgb(255, 167, 196)',
-            }}
-            to={'/'}
-          >
-            {title}
-          </Link>
-        </h3>
-      );
     }
+    return (
+      <h3
+        style={{
+          fontFamily: 'Montserrat, sans-serif',
+          marginTop: 0,
+          marginBottom: rhythm(-1),
+          minHeight: '3.5rem',
+        }}
+      >
+        <Link
+          style={{
+            boxShadow: 'none',
+            textDecoration: 'none',
+            color: 'rgb(255, 167, 196)',
+          }}
+          to="/"
+        >
+          {title}
+        </Link>
+      </h3>
+    );
   }
-  render() {
+
+  render(): JSX.Element {
     const { children, location } = this.props;
+    const { theme } = this.state;
     const isHomePage = location.pathname === rootPath;
     // Keep dark/light mode switch aligned between home and post page
     // Does this make sense? No.
@@ -117,29 +122,28 @@ class Layout extends React.Component<PropsType, StateType> {
             }}
           >
             {this.renderHeader()}
-            {this.state.theme !== null ? (
+            {theme !== null ? (
               <Toggle
                 icons={{
                   checked: (
                     <img
                       src={moon}
-                      role="presentation"
+                      alt="dark mode"
                       style={{ pointerEvents: 'none' }}
                     />
                   ),
                   unchecked: (
                     <img
                       src={sun}
+                      alt="light mode"
                       role="presentation"
                       style={{ pointerEvents: 'none' }}
                     />
                   ),
                 }}
-                checked={this.state.theme === 'dark'}
+                checked={theme === 'dark'}
                 onChange={(e: any) =>
-                  window.__setPreferredTheme(
-                    e.target.checked ? 'dark' : 'light'
-                  )
+                  window.setPreferredTheme(e.target.checked ? 'dark' : 'light')
                 }
               />
             ) : (

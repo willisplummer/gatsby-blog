@@ -2,7 +2,7 @@ import React from 'react';
 
 import { rhythm } from '../utils/typography';
 
-const Footer = () => (
+const Footer = (): JSX.Element => (
   <footer
     style={{
       marginTop: rhythm(2.5),

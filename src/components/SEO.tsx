@@ -1,6 +1,5 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 
 const query = graphql`
@@ -16,14 +15,14 @@ const query = graphql`
   }
 `;
 
-type PropsType = {
+interface PropsType {
   meta: any[];
   image?: string;
   title?: string;
   description?: string;
   slug?: string;
   lang?: string;
-};
+}
 
 const SEO = ({
   meta,
@@ -93,7 +92,7 @@ const SEO = ({
                       content: metaImage,
                     },
                   ]
-                : []
+                : [],
             )
             .concat(meta)}
         />

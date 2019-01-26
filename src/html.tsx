@@ -1,16 +1,23 @@
 import React from 'react';
 
-type PropsType = {
-  htmlAttributes: Object;
+interface PropsType {
+  htmlAttributes: Record<string, any>;
   headComponents: any[];
-  bodyAttributes: Object;
+  bodyAttributes: Record<string, any>;
   preBodyComponents: any[];
   body: string;
   postBodyComponents: any[];
-};
+}
 
-const HTML = (props: PropsType) => (
-  <html {...props.htmlAttributes}>
+const HTML = ({
+  htmlAttributes,
+  headComponents,
+  bodyAttributes,
+  preBodyComponents,
+  postBodyComponents,
+  body,
+}: PropsType): JSX.Element => (
+  <html lang="en-US" {...htmlAttributes}>
     <head>
       <meta charSet="utf-8" />
       <meta httpEquiv="x-ua-compatible" content="ie=edge" />
@@ -18,10 +25,11 @@ const HTML = (props: PropsType) => (
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
-      {props.headComponents}
+      {headComponents}
     </head>
-    <body {...props.bodyAttributes} className="light">
+    <body {...bodyAttributes} className="light">
       <script
+        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: `
           (function() {
@@ -55,13 +63,13 @@ const HTML = (props: PropsType) => (
         `,
         }}
       />
-      {props.preBodyComponents}
+      {preBodyComponents}
       <div
-        key={`body`}
+        key="body"
         id="___gatsby"
-        dangerouslySetInnerHTML={{ __html: props.body }}
+        dangerouslySetInnerHTML={{ __html: body }}
       />
-      {props.postBodyComponents}
+      {postBodyComponents}
     </body>
   </html>
 );

@@ -3,6 +3,14 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
   "extends": [
     "airbnb",
     "prettier",
@@ -17,14 +25,14 @@
   ],
   "env": {
     "browser": true,
-    "node": true,
     "jest": true
   },
   "rules": {
+    "@typescript-eslint/indent": 0,
+    "@typescript-eslint/explicit-member-accessibility": 0,
     "no-unused-vars": 2,
     "import/no-anonymous-default-export": 2,
     "prefer-object-spread/prefer-object-spread": 2,
-    "flowtype/define-flow-type": 1,
     "react/jsx-filename-extension": 0,
     "react/prop-types": 0,
     "react/require-default-props": 0,

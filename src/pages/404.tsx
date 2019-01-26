@@ -1,15 +1,16 @@
 import React from 'react';
 import Layout from '../components/Layout';
 
-type PropsType = {
+interface PropsType {
   location: { pathname: string };
-};
+}
 
 const NotFoundPage = ({ location }: PropsType): JSX.Element => (
-  <Layout title={'The Compiler Is My Copilot'} location={location}>
+  <Layout title="The Compiler Is My Copilot" location={location}>
     <h1>Not Found</h1>
     <p>I haven’t written this post yet. Will you help me write it?</p>
     <iframe
+      title="TODO: delete frankie cosmos"
       width="560"
       height="315"
       src="https://www.youtube.com/embed/6IJB0aD8gSA"

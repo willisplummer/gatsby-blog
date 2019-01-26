@@ -21,19 +21,19 @@ const systemFont = `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif`;
 
-type TranslationsPropsType = {
+interface TranslationsPropsType {
   translations: any;
   lang: any;
   languageLink: any;
   editUrl: string;
-};
+}
 
 const Translations = ({
   translations,
   lang,
   languageLink,
   editUrl,
-}: TranslationsPropsType) => (
+}: TranslationsPropsType): JSX.Element => (
   <p
     style={{
       fontSize: '0.9em',
@@ -75,36 +75,40 @@ const Translations = ({
   </p>
 );
 
-type PropsType = {
+interface PropsType {
   data: any;
   pageContext: { previous: any; next: any; slug: string };
   location: any;
-};
+}
 
-const BlogPostTemplate = (props: PropsType) => {
-  const post = props.data.markdownRemark;
-  const siteTitle = get(props, 'data.site.siteMetadata.title');
-  const { previous, next, slug } = props.pageContext;
+const BlogPostTemplate = ({
+  data,
+  pageContext,
+  location,
+}: PropsType): JSX.Element => {
+  const post = data.markdownRemark;
+  const siteTitle = get(data, 'site.siteMetadata.title');
+  const { previous, next, slug } = pageContext;
   const lang = post.fields.langKey;
   const translations = (post.frontmatter.langs || []).filter(
-    (l: string) => l !== 'en'
+    (l: string) => l !== 'en',
   );
-  translations.sort((a: string, b: string) => {
-    return codeToLanguage(a) < codeToLanguage(b) ? -1 : 1;
-  });
+  translations.sort((a: string, b: string) =>
+    codeToLanguage(a) < codeToLanguage(b) ? -1 : 1,
+  );
 
   loadFontsForCode(lang);
   const languageLink = createLanguageLink(slug, lang);
   const enSlug = languageLink('en');
   const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src/pages/${enSlug.slice(
     1,
-    enSlug.length - 1
-  )}/index${lang === 'en' ? '' : '.' + lang}.md`;
+    enSlug.length - 1,
+  )}/index${lang === 'en' ? '' : `.${lang}`}.md`;
   const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `https://willisplummer.com${enSlug}`
+    `https://willisplummer.com${enSlug}`,
   )}`;
   return (
-    <Layout location={props.location} title={siteTitle}>
+    <Layout location={location} title={siteTitle}>
       <SEO
         lang={lang}
         title={post.frontmatter.title}
@@ -131,7 +135,10 @@ const BlogPostTemplate = (props: PropsType) => {
           lang={lang}
         />
       )}
-      <div dangerouslySetInnerHTML={{ __html: post.html }} />
+      <div
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: post.html }}
+      />
       <p>
         <a href={discussUrl} target="_blank" rel="noopener noreferrer">
           Discuss on Twitter
@@ -161,7 +168,7 @@ const BlogPostTemplate = (props: PropsType) => {
             textDecoration: 'none',
             color: 'var(--pink)',
           }}
-          to={'/'}
+          to="/"
         >
           {siteTitle}
         </Link>
