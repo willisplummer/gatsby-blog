@@ -10,5 +10,5 @@ To run locally, `yarn`, then `yarn dev`, then open https://localhost:8000.
 - [X] Publish to blog.willisplummer.com via github pages
 - [X] Actually perform typechecking
 - [X] Fix nightmode (lol)
-- [ ] Update subscription form to work with my email list
 - [ ] Set up a tag system to sort posts about programming and posts about art or move art posts to elsewhere
+- [ ] Add a subscribe to mailing list form
