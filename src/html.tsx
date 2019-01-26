@@ -33,12 +33,12 @@ const HTML = ({
         dangerouslySetInnerHTML={{
           __html: `
           (function() {
-            window.__onThemeChange = function() {};
+            window.onThemeChange = function() {};
             function setTheme(newTheme) {
-              window.__theme = newTheme;
+              window.theme = newTheme;
               preferredTheme = newTheme;
               document.body.className = newTheme;
-              window.__onThemeChange(newTheme);
+              window.onThemeChange(newTheme);
             }
 
             var preferredTheme;
@@ -46,7 +46,7 @@ const HTML = ({
               preferredTheme = localStorage.getItem('theme');
             } catch (err) { }
 
-            window.__setPreferredTheme = function(newTheme) {
+            window.setPreferredTheme = function(newTheme) {
               setTheme(newTheme);
               try {
                 localStorage.setItem('theme', newTheme);
@@ -55,7 +55,7 @@ const HTML = ({
 
             var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
             darkQuery.addListener(function(e) {
-              window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+              window.setPreferredTheme(e.matches ? 'dark' : 'light')
             });
 
             setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));

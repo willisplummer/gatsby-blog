@@ -90,6 +90,7 @@ class Layout extends React.Component<PropsType, StateType> {
   }
 
   render(): JSX.Element {
+    console.log(window);
     const { children, location } = this.props;
     const { theme } = this.state;
     const isHomePage = location.pathname === rootPath;
