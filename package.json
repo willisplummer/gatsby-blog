@@ -54,16 +54,18 @@
     "tslint-react": "^3.6.0",
     "typescript": "^3.2.4"
   },
-  "homepage": "https://overreacted.io",
+  "homepage": "https://blog.willisplummer.com",
   "license": "MIT",
   "scripts": {
     "dev": "gatsby develop",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-pattern public .",
-    "format": "prettier --write '{gatsby-*.js,src/**/*.{js,jsx,json,css}}'",
+    "format": "prettier --write '{gatsby-*.js,src/**/*.{js,jsx,json,css,ts,tsx}}'",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
     "develop": "gatsby develop",
     "start": "npm run develop",
     "build": "rm -rf public && rm -rf .cache && gatsby build",
-    "deploy": "yarn build && gh-pages -d public"
+    "deploy": "typecheck && yarn build && gh-pages -d public"
   },
   "husky": {
     "hooks": {

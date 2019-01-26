@@ -9,7 +9,7 @@
 
 // Please keep keys lowercase!
 export const codeToLanguage = (code: string): string => {
-  const languageMap: {[s: string]: string} = {
+  const languageMap: { [s: string]: string } = {
     en: 'English',
     ru: 'Русский',
     tr: 'Türkçe',
@@ -25,10 +25,10 @@ export const codeToLanguage = (code: string): string => {
     hu: 'Magyar',
     vi: 'Tiếng Việt',
     th: 'ไทย',
-  }
+  };
 
-  return (languageMap[code]);
-}
+  return languageMap[code];
+};
 
 export const loadFontsForCode = (code: string) => {
   switch (code) {
@@ -56,7 +56,10 @@ export const loadFontsForCode = (code: string) => {
   }
 };
 
-export const createLanguageLink = (slug: string, lang: string): ((targetLang: string) => string) => {
+export const createLanguageLink = (
+  slug: string,
+  lang: string
+): ((targetLang: string) => string) => {
   const rawSlug = slug.replace(`${lang}/`, '');
 
   return targetLang =>

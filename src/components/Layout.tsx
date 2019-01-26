@@ -11,18 +11,21 @@ import * as moon from '../assets/moon.png';
 const rootPath = `${__PATH_PREFIX__}/`;
 
 type PropsType = {
-  location: { pathname: string },
-  title: string,
-}
+  location: { pathname: string };
+  title: string;
+};
 
 type StateType = {
-  theme: string | null
-}
+  theme: string | null;
+};
 
 declare global {
-  interface Window { __onThemeChange: any, __theme: any, __setPreferredTheme: any }
+  interface Window {
+    __onThemeChange: any;
+    __theme: any;
+    __setPreferredTheme: any;
+  }
 }
-
 
 class Layout extends React.Component<PropsType, StateType> {
   state = {

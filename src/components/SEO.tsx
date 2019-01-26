@@ -17,15 +17,22 @@ const query = graphql`
 `;
 
 type PropsType = {
-  meta: any[],
-  image: string,
-  title: string,
-  description: string,
-  slug: string,
-  lang: string,
-}
+  meta: any[];
+  image?: string;
+  title?: string;
+  description?: string;
+  slug?: string;
+  lang?: string;
+};
 
-const SEO = ({ meta, image, title, description, slug, lang = 'en' }: PropsType): JSX.Element => (
+const SEO = ({
+  meta,
+  image,
+  title,
+  description,
+  slug,
+  lang = 'en',
+}: PropsType): JSX.Element => (
   <StaticQuery
     query={query}
     render={data => {

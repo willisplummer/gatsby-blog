@@ -21,169 +21,179 @@ const systemFont = `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif`;
 
-class Translations extends React.Component {
-  render() {
-    const { translations, lang, languageLink, editUrl } = this.props;
-    return (
+type TranslationsPropsType = {
+  translations: any;
+  lang: any;
+  languageLink: any;
+  editUrl: string;
+};
+
+const Translations = ({
+  translations,
+  lang,
+  languageLink,
+  editUrl,
+}: TranslationsPropsType) => (
+  <p
+    style={{
+      fontSize: '0.9em',
+      border: '1px solid var(--hr)',
+      borderRadius: '0.75em',
+      padding: '0.75em',
+      background: 'var(--inlineCode-bg)',
+      // Use system font to avoid loading extra glyphs for language names
+      fontFamily: systemFont,
+    }}
+  >
+    {translations.length > 0 && (
+      <span>
+        <span>Translations by readers: </span>
+        {translations.map((l: string, i: number) => (
+          <React.Fragment key={l}>
+            {l === lang ? (
+              <b>{codeToLanguage(l)}</b>
+            ) : (
+              <Link to={languageLink(l)}>{codeToLanguage(l)}</Link>
+            )}
+            {i === translations.length - 1 ? '' : ' • '}
+          </React.Fragment>
+        ))}
+      </span>
+    )}
+    {lang !== 'en' && (
+      <>
+        <br />
+        <br />
+        <Link to={languageLink('en')}>Read</Link>
+        {' the original or '}
+        <a href={editUrl} target="_blank" rel="noopener noreferrer">
+          improve
+        </a>{' '}
+        this translation.
+      </>
+    )}
+  </p>
+);
+
+type PropsType = {
+  data: any;
+  pageContext: { previous: any; next: any; slug: string };
+  location: any;
+};
+
+const BlogPostTemplate = (props: PropsType) => {
+  const post = props.data.markdownRemark;
+  const siteTitle = get(props, 'data.site.siteMetadata.title');
+  const { previous, next, slug } = props.pageContext;
+  const lang = post.fields.langKey;
+  const translations = (post.frontmatter.langs || []).filter(
+    (l: string) => l !== 'en'
+  );
+  translations.sort((a: string, b: string) => {
+    return codeToLanguage(a) < codeToLanguage(b) ? -1 : 1;
+  });
+
+  loadFontsForCode(lang);
+  const languageLink = createLanguageLink(slug, lang);
+  const enSlug = languageLink('en');
+  const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src/pages/${enSlug.slice(
+    1,
+    enSlug.length - 1
+  )}/index${lang === 'en' ? '' : '.' + lang}.md`;
+  const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
+    `https://willisplummer.com${enSlug}`
+  )}`;
+  return (
+    <Layout location={props.location} title={siteTitle}>
+      <SEO
+        lang={lang}
+        title={post.frontmatter.title}
+        description={post.frontmatter.spoiler}
+        slug={post.fields.slug}
+      />
+      <h1 style={{ color: 'var(--textTitle)' }}>{post.frontmatter.title}</h1>
       <p
         style={{
-          fontSize: '0.9em',
-          border: '1px solid var(--hr)',
-          borderRadius: '0.75em',
-          padding: '0.75em',
-          background: 'var(--inlineCode-bg)',
-          // Use system font to avoid loading extra glyphs for language names
+          ...scale(-1 / 5),
+          display: 'block',
+          marginBottom: rhythm(1),
+          marginTop: rhythm(-4 / 5),
+        }}
+      >
+        {post.frontmatter.date}
+        {` • ${formatReadingTime(post.timeToRead)}`}
+      </p>
+      {translations.length > 0 && (
+        <Translations
+          translations={translations}
+          editUrl={editUrl}
+          languageLink={languageLink}
+          lang={lang}
+        />
+      )}
+      <div dangerouslySetInnerHTML={{ __html: post.html }} />
+      <p>
+        <a href={discussUrl} target="_blank" rel="noopener noreferrer">
+          Discuss on Twitter
+        </a>
+        {` • `}
+        <a href={editUrl} target="_blank" rel="noopener noreferrer">
+          Edit on GitHub
+        </a>
+      </p>
+      <div
+        style={{
+          margin: '90px 0 40px 0',
           fontFamily: systemFont,
         }}
       >
-        {translations.length > 0 && (
-          <span ref={this.translationsRef}>
-            <span ref={this.translationsChildRef}>
-              Translations by readers:{' '}
-            </span>
-            {translations.map((l, i) => (
-              <React.Fragment key={l}>
-                {l === lang ? (
-                  <b>{codeToLanguage(l)}</b>
-                ) : (
-                  <Link to={languageLink(l)}>{codeToLanguage(l)}</Link>
-                )}
-                {i === translations.length - 1 ? '' : ' • '}
-              </React.Fragment>
-            ))}
-          </span>
-        )}
-        {lang !== 'en' && (
-          <>
-            <br />
-            <br />
-            <Link to={languageLink('en')}>Read</Link>
-            {' the original or '}
-            <a href={editUrl} target="_blank" rel="noopener noreferrer">
-              improve
-            </a>{' '}
-            this translation.
-          </>
-        )}
-      </p>
-    );
-  }
-}
-
-class BlogPostTemplate extends React.Component {
-  render() {
-    const post = this.props.data.markdownRemark;
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title');
-    const { previous, next, slug } = this.props.pageContext;
-    const lang = post.fields.langKey;
-    const translations = (post.frontmatter.langs || []).filter(l => l !== 'en');
-    translations.sort((a, b) => {
-      return codeToLanguage(a) < codeToLanguage(b) ? -1 : 1;
-    });
-
-    loadFontsForCode(lang);
-    const languageLink = createLanguageLink(slug, lang);
-    const enSlug = languageLink('en');
-    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src/pages/${enSlug.slice(
-      1,
-      enSlug.length - 1
-    )}/index${lang === 'en' ? '' : '.' + lang}.md`;
-    const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
-      `https://willisplummer.com${enSlug}`
-    )}`;
-    return (
-      <Layout location={this.props.location} title={siteTitle}>
-        <SEO
-          lang={lang}
-          title={post.frontmatter.title}
-          description={post.frontmatter.spoiler}
-          slug={post.fields.slug}
-          lang={lang}
-        />
-        <h1 style={{ color: 'var(--textTitle)' }}>{post.frontmatter.title}</h1>
-        <p
+        <Signup />
+      </div>
+      <h3
+        style={{
+          fontFamily: 'Montserrat, sans-serif',
+          marginTop: rhythm(0.25),
+        }}
+      >
+        <Link
           style={{
-            ...scale(-1 / 5),
-            display: 'block',
-            marginBottom: rhythm(1),
-            marginTop: rhythm(-4 / 5),
+            boxShadow: 'none',
+            textDecoration: 'none',
+            color: 'var(--pink)',
           }}
+          to={'/'}
         >
-          {post.frontmatter.date}
-          {` • ${formatReadingTime(post.timeToRead)}`}
-        </p>
-        {translations.length > 0 && (
-          <Translations
-            translations={translations}
-            editUrl={editUrl}
-            languageLink={languageLink}
-            lang={lang}
-          />
-        )}
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        <p>
-          <a href={discussUrl} target="_blank" rel="noopener noreferrer">
-            Discuss on Twitter
-          </a>
-          {` • `}
-          <a href={editUrl} target="_blank" rel="noopener noreferrer">
-            Edit on GitHub
-          </a>
-        </p>
-        <div
-          style={{
-            margin: '90px 0 40px 0',
-            fontFamily: systemFont,
-          }}
-        >
-          <Signup />
-        </div>
-        <h3
-          style={{
-            fontFamily: 'Montserrat, sans-serif',
-            marginTop: rhythm(0.25),
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: 'none',
-              textDecoration: 'none',
-              color: 'var(--pink)',
-            }}
-            to={'/'}
-          >
-            {siteTitle}
-          </Link>
-        </h3>
-        <Bio />
-        <ul
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            listStyle: 'none',
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </Layout>
-    );
-  }
-}
+          {siteTitle}
+        </Link>
+      </h3>
+      <Bio />
+      <ul
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          listStyle: 'none',
+          padding: 0,
+        }}
+      >
+        <li>
+          {previous && (
+            <Link to={previous.fields.slug} rel="prev">
+              ← {previous.frontmatter.title}
+            </Link>
+          )}
+        </li>
+        <li>
+          {next && (
+            <Link to={next.fields.slug} rel="next">
+              {next.frontmatter.title} →
+            </Link>
+          )}
+        </li>
+      </ul>
+    </Layout>
+  );
+};
 
 export default BlogPostTemplate;
 
