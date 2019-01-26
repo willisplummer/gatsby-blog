@@ -59,10 +59,7 @@
     "eslint-plugin-react": "^7.11.1",
     "gh-pages": "^2.0.1",
     "prettier": "^1.14.2",
-    "tslint": "^5.12.1",
-    "tslint-config-prettier": "^1.17.0",
-    "tslint-react": "^3.6.0",
-    "typescript": "3.2.1"
+    "typescript": "^3.2.4"
   },
   "homepage": "https://blog.willisplummer.com",
   "license": "MIT",
