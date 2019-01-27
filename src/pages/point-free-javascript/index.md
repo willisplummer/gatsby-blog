@@ -53,7 +53,7 @@ const incrArr = arr => arr.map(incr)
 
 In this implementation we've taken the call to `incr` point-free, because we're not defining the arguments that get passed to it. Instead, we're just saying that `incr` will implicitly accept all of the arguments passed in by `map`.
 
-At first, I found this syntax to be a little confusing because you can't see explicitly which arguments `map` passes to `incr`, but now that I'm used to it, this style is much easier to reason about.
+At first, I found this syntax to be a little confusing because you can't see explicitly which arguments `map` passes to `incr`, but now that I'm used to it, this style is easier to reason about and so much less cluttered with unnecessary syntax.
 
 This is especially true when considering longer method chains:
 
@@ -64,7 +64,7 @@ const transformArr = arr => arr
   .reduce((acc, n) => acc + n, 0)
 ```
 
-which we can rewrite as
+can be rewritten as:
 
 ```js
 const incr = n => n + 1
@@ -79,7 +79,7 @@ const transformArr = arr => arr
 
 Hopefully, it's pretty clear that the point-free style here is much more expressive about the transformations that we're performing. Beyond expressiveness, we end up breaking out the anonymous functions into single-purpose named functions which can be tested in isolation and reused throughout the application, which will help to DRY up our codebase.
 
-Another great candidate for point-free syntax is a promise chain. For example:
+Promise chains are also great candidates to go point-free:
 
 ```js
 fetch('https://jsonplaceholder.typicode.com/todos/1')
@@ -87,7 +87,7 @@ fetch('https://jsonplaceholder.typicode.com/todos/1')
   .then(json => console.log(json))
 ```
 
-We can go point-free like so:
+becomes:
 
 ```js
 const parseJson = (response) => response.json()
@@ -99,7 +99,7 @@ fetch('https://jsonplaceholder.typicode.com/todos/1')
 
 I've found that `.then(console.log)` in particular surprises people. When you think about it, `console.log` is just a function that takes an arbitrary number of arguments and prints them to the console.
 
-If we wanted to log results in the middle of a promise chain and then continue transforming the result, we could even do the following:
+If we wanted to log results in the middle of a promise chain and then continue transforming the result, we do something like this:
 
 ```js
 const parseJson = response => response.json();
@@ -132,7 +132,7 @@ const incr = n => n + 1
 const incrArr = map(incr)
 ```
 
-Now, `incrArr` is entirely point-free. It makes no reference to the arguments that it takes. If this refactor seems too extreme, you definitely don't have to go beyond eliminating your anonymous functions. The benefit of this approach, though, is that we are able to define new functions simply by composing the functions that we already have.
+Here we've written a curried `map` function where it accepts each of its arguments independently and rewritten `incrArr` to be entirely point-free in that it makes no reference to the arguments that it takes. If this refactor seems too extreme, you definitely don't have to go beyond eliminating your anonymous functions. The benefit of this approach, though, is that we are able to define new functions simply by composing the functions that we already have.
 
 To see function composition in action, lets revisit our refactored `transformArr` function and apply these same strategies. As a reminder, we left it looking like this:
 
