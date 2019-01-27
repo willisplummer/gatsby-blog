@@ -7,7 +7,7 @@ spoiler: 'A primer on point-free syntax in JavaScript'
 
 I've tried to show [point-free style](https://en.wikipedia.org/wiki/Tacit_programming) (AKA _tacit programming_) to coworkers a few times and have always found myself surprised at how difficult it is to articulate.
 
-A generic definition of point-free is that it's when a function is defined without mentioning its arguments _(or 'points')_. On its own, that definition's probably not very helpful, but hopefully by the end of this post things will start making sense.
+A generic definition of point-free is that it's when a function is defined without mentioning its arguments _(or 'points')_. On its own, that definition's probably not very helpful, but after considering a few examples things should make more sense.
 
 Let's look at a simple function that accepts an array of numbers, maps over the array and increments each element by one.
 
