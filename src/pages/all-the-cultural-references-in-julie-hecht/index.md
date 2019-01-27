@@ -2,7 +2,7 @@
 title: All the cultural references in Julie Hecht's fiction
 date: '2018-01-21'
 langs: ['en']
-spoiler: A list of movies, books, music, etc. that mentioned by the narrator of Do The Windows Open?, The Unprofessionals, and Happy Trails To You
+spoiler: A list of movies, books, music, etc. mentioned by the narrator of Do The Windows Open?, The Unprofessionals, and Happy Trails To You
 ---
 
 This is a chronological list of cultural references that the narrator makes in Julie Hecht's three connected works of fiction Do The Windows Open?, The Unprofessionals, and Happy Trails To You. The original reason I thought to do this is that I had enjoyed reading her work so much that I thought it might be a nice way to feel more immersed if I read, watched, listened to, or at least looked up all of the other art that she references.

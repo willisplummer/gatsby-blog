@@ -5,9 +5,9 @@ langs: ['en']
 spoiler: 'Sometimes you can just pass your function in!'
 ---
 
-New blogs are intimidating, so I figured I'd start with a straightforward post trying to explain in my own words what point-free syntax is and how it works. I've tried to articulate point-free to coworkers a few times and always found myself surprised at how difficult it is, so it seemed like a prime candidate for blogging.
+New blogs are intimidating, so I figured I'd start with a straightforward post trying to explain in my own words what [point-free style](https://en.wikipedia.org/wiki/Tacit_programming) (AKA _tacit programming_) is and how it works. I figured this was worth blogging about because I've tried to show point-free syntax to co-workers a few times and always found myself surprised at how difficult it is to articulate.
 
-Lets look at an example and then convert it to the point-free style. We want to write a function that when given an array of numbers, maps over the array and increments each number by one. We also want to test that function. Here's the code:
+Lets look at an example function that accepts an array of numbers, maps over the array and increments each number by one:
 
 _(As a quick note, I'll be writing all my tests using [jest](https://jestjs.io/)'s syntax.)_
 
@@ -25,7 +25,7 @@ describe('incrArr', () => {
 
 **Result**: ✅ tests pass!
 
-Pretty straight foward, right? Now, lets say that we want to unit-test the anonymous function passed to map to increment each element of the array. We can rewrite the above to be:
+Pretty straight foward, right? Now, lets say that we want to unit-test the anonymous function passed to `map` to increment each element of the array. We can rewrite the above to be:
 
 ```js
 const incr = (number) => number + 1
@@ -56,35 +56,11 @@ const incrArr = (arr) => arr.map(incr)
 ```
 **Result**: ✅ tests pass!
 
-This final change is called point-free style because we're not defining the arguments that get passed to `incr`. Instead, we're just saying that `incr` will accept all of the arguments passed in by `map`.
+This final implementation is point-free,because we're not defining the arguments that get passed to `incr`. Instead, we're just saying that `incr` will implicitly accept all of the arguments passed in by `map`.
 
-At first, I found this syntax to be a little confusing because you can't see what arguments `map` is passing to `incr`, but once you're used to it, it's even easier to reason about. Particularly in longer function chains.
+At first, I found this syntax to be a little confusing because you can't see explicitly which arguments `map` passes to `incr`, but now that I'm used to it, this style is easier to reason about, particularly when considering longer method chains.
 
 Consider the following:
-
-```js
-const incr = (number) => number + 1
-
-const isEven = (number) => number % 2 === 0
-
-const sum = (acc, number) => acc + number
-
-const transformArr = (arr) => arr
-  .map(incr)
-  .filter(isEven)
-  .reduce(sum, 0)
-```
-
-without point-free, we'd end up writing something like this:
-
-```js
-const transformArr = (arr) => arr
-  .map(n => incr(n))
-  .filter(n => isEven(n))
-  .reduce((acc, n) => sum(acc, n), 0)
-```
-
-or worse:
 
 ```js
 const transformArr = (arr) => arr
@@ -93,7 +69,20 @@ const transformArr = (arr) => arr
   .reduce((acc, n) => acc + n, 0)
 ```
 
-Hopefully, it's pretty clear that writing point-free code when it's convenient to do so will encourage you to write small unit-testable functions and then compose them together instead of relying on long chains of anonymous functions.
+which we can rewrite as
+
+```js
+const incr = (number) => number + 1
+const isEven = (number) => number % 2 === 0
+const sum = (acc, number) => acc + number
+
+const transformArr = (arr) => arr
+  .map(incr)
+  .filter(isEven)
+  .reduce(sum, 0)
+```
+
+Hopefully, it's pretty clear that the point-free style here is much more expressive about the transformations that we're performing. It's also a bonus that because we end up breaking out the anonymous functions into reusable, single-purpose functions which can then be tested in isolation.
 
 Another great candidate for point-free syntax is in promise chains. For example:
 
@@ -113,11 +102,13 @@ fetch('https://jsonplaceholder.typicode.com/todos/1')
   .then(console.log)
 ```
 
-I've found that `.then(console.log)` in particular surprises people but when you think about it, it's just a function that takes an arbitray number of arguments and prints them to the console. If we wanted to log results in the middle of promise chain we could even do the following:
+I've found that `.then(console.log)` in particular surprises people. When you think about it `console.log` is just a function that takes an arbitrary number of arguments and prints them to the console.
+
+If we wanted to log results in the middle of a promise chain and then continue transforming the result, we could even do the following:
 
 ```js
 const parseJson = response => response.json();
-const logAndPassthrough = (todo) => {
+const logAndPassThrough = (todo) => {
   console.log(todo);
   return todo;
 };
@@ -125,11 +116,9 @@ const isCompleted = (todo) => todo.completed
 
 fetch("https://jsonplaceholder.typicode.com/todos/1")
   .then(response => response.json())
-  .then(logAndPassthrough)
+  .then(logAndPassThrough)
   .then(isCompleted)
   .then(console.log)
 ```
 
-For quick debugging, being able to throw in a logger with minimal keystrokes is pretty great IMO.
-
-
+For quick debugging, being able to throw in a logger with minimal keystrokes is pretty great in my opinion.
