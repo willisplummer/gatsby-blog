@@ -5,9 +5,9 @@ langs: ['en']
 spoiler: 'A primer on point-free syntax in JavaScript'
 ---
 
-New blogs are intimidating, so I figured I'd start with a relatively straightforward post explaining in my own words what [point-free style](https://en.wikipedia.org/wiki/Tacit_programming) (AKA _tacit programming_) is and how it works. I figured this was worth blogging about because I've tried to show point-free syntax to coworkers a few times and always found myself surprised at how difficult it is to articulate.
+I've tried to show [point-free style](https://en.wikipedia.org/wiki/Tacit_programming) (AKA _tacit programming_) to coworkers a few times and have always found myself surprised at how difficult it is to articulate.
 
-A generic definition of point-free is that it's when a function is defined without mentioning its arguments (_or_ 'points'). On its own, that's probably not very helpful, but hopefully by the end of this post it will start making sense.
+A generic definition of point-free is that it's when a function is defined without mentioning its arguments _(or 'points')_. On its own, that definition's probably not very helpful, but hopefully by the end of this post things will start making sense.
 
 Let's look at a simple function that accepts an array of numbers, maps over the array and increments each element by one.
 
@@ -51,7 +51,7 @@ This is what I see a lot of people do, and it's fine, but there's an untested an
 const incrArr = arr => arr.map(incr)
 ```
 
-This final implementation is point-free, because we're not defining the arguments that get passed to `incr`. Instead, we're just saying that `incr` will implicitly accept all of the arguments passed in by `map`.
+In this implementation we've taken the call to `incr` point-free, because we're not defining the arguments that get passed to it. Instead, we're just saying that `incr` will implicitly accept all of the arguments passed in by `map`.
 
 At first, I found this syntax to be a little confusing because you can't see explicitly which arguments `map` passes to `incr`, but now that I'm used to it, this style is much easier to reason about.
 
@@ -118,11 +118,25 @@ fetch("https://jsonplaceholder.typicode.com/todos/1")
 
 For quick debugging, being able to throw in a logger with minimal keystrokes is pretty great in my opinion.
 
-### Beyond Dot Chaining
+### Beyond Method Chaining
 
-These examples are just scratching the surface of how point-free syntax can improve your JavaScript. It really begins to shine when we combine it with currying, partial-application, and function composition.
+These examples are just scratching the surface of how point-free syntax can improve your JavaScript. It really begins to shine when we combine it with currying, partial function application, and function composition.
 
-As a final note, lets revisit our refactored `transformArr` function, which looked like this:
+If we revisit `incrArr`, we can take it to another level of point-free syntax:
+
+```js
+// before:
+// const incrArr = arr => arr.map(incr)
+
+const map = fn => arr => arr.map(fn)
+const incr = n => n + 1
+
+const incrArr = map(incr)
+```
+
+Now, `incrArr` is entirely point-free. It makes no reference to the arguments that it takes. If seems to extreme, you definitely don't have to go beyond eliminating your anonymous functions. The benefit of this approach, though, is that we are able to define new functions simply by composing other functions that we already have.
+
+To see function composition in action, lets revisit our refactored `transformArr` function and apply these same strategies. We left it looking like this:
 
 ```js
 const incr = n => n + 1
@@ -145,10 +159,34 @@ const incr = n => sum(1, n)
 And then we can take it a step further using partial function application.
 
 ```js
-import partial from 'lodash/partial'
-
 const sum = (a, b) => a + b
-const incr = partial(sum, 1)
+const incr = sum.bind(null, 1)
 ```
 
-For the sake of time, I've used lodash's [`partial`](https://lodash.com/docs/4.17.11#partial) function to apply a value of `1` to `a` in the function `sum` and then return a new function `b => 1 + b`. You'll notice that `incr` is now also point-free 😎.
+I've used bind to apply a value of `1` to `a` in the function `sum`. This will return a new function `n => sum(1, n)`, which is the same as how we had previously defined `incr`, but you'll notice that `incr` is now point-free 😎.
+
+It's worth noting that the use of bind for partial-application is [generally discouraged](https://hackernoon.com/partial-application-of-functions-dbe7d9b80760) when writing functional JavaScript, because it gives you the ability to define context (also known as _this_) via that first argument which we passed `null` to. Instead, you should probably use something like [lodash's partial function](https://lodash.com/docs/4.17.11#partial).
+
+If we take our refactor to its logical conclusion, we arrive at something like this:
+
+```js
+// utils
+const map = fn => arr => arr.map(fn)
+const filter = pred => arr => arr.filter(pred)
+const reduce = (fn, acc) => arr => arr.reduce(fn, acc)
+const compose3 = (fn3, fn2, fn1) => x => fn3(fn2(fn1(x)))
+
+// number fns
+const sum = (a, b) => a + b
+const incr = sum.bind(null, 1)
+const isEven = n => n % 2 === 0
+
+// array transformations
+const incrementNumbers = map(incr)
+const removeOdds = filter(isEven)
+const sumNumbers = reduce(sum, 0)
+
+const transformArr = compose3(sumNumbers, removeOdds, incrementNumbers);
+```
+
+This final example looks like a lot more code than what we started with, but if you consider that the utils are most likely functions that you'd import from a library like `lodash` and that the number functions are entirely reusable utils that you'd define once and use across your application, you can see how you're really starting to build up a toolbelt of testable and composable functions while refactoring your code in a more functional style.
