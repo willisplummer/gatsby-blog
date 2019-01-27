@@ -5,30 +5,25 @@ langs: ['en']
 spoiler: 'Sometimes you can just pass your function in!'
 ---
 
-New blogs are intimidating, so I figured I'd start with a straightforward post trying to explain in my own words what [point-free style](https://en.wikipedia.org/wiki/Tacit_programming) (AKA _tacit programming_) is and how it works. I figured this was worth blogging about because I've tried to show point-free syntax to co-workers a few times and always found myself surprised at how difficult it is to articulate.
+New blogs are intimidating, so I figured I'd start with a straightforward post trying to explain in my own words what [point-free style](https://en.wikipedia.org/wiki/Tacit_programming) (AKA _tacit programming_) is and how it works. I figured this was worth blogging about because I've tried to show point-free syntax to coworkers a few times and always found myself surprised at how difficult it is to articulate.
 
-Lets look at an example function that accepts an array of numbers, maps over the array and increments each number by one:
-
-_(As a quick note, I'll be writing all my tests using [jest](https://jestjs.io/)'s syntax.)_
+Lets look at a simple function that accepts an array of numbers, maps over the array and increments each number by one. I'll be writing all my tests using [jest](https://jestjs.io/) syntax.
 
 ```js
-const incrArr = (arr) => arr.map((number) => number + 1)
+const incrArr = (arr) => arr.map(n => n + 1)
 
 describe('incrArr', () => {
   it('increments each number in the array', () => {
-    const arr = [1, 2, 3];
-
-    expect(incrArr(arr)).toEqual([2, 3, 4])
+    expect(incrArr([1, 2, 3]))
+      .toEqual([2, 3, 4])
   })
 })
 ```
 
-**Result**: ✅ tests pass!
-
-Pretty straight foward, right? Now, lets say that we want to unit-test the anonymous function passed to `map` to increment each element of the array. We can rewrite the above to be:
+Pretty straight foward, right? Now, lets say that we want to unit-test the anonymous function we're passing to `map` to increment each element of the array. We can rewrite the above as:
 
 ```js
-const incr = (number) => number + 1
+const incr = (n) => n + 1
 
 describe('incr', () => {
   it('increments a number by 1', () => {
@@ -36,34 +31,30 @@ describe('incr', () => {
   })
 })
 
-const incrArr = (arr) => arr.map((number) => incr(number))
+const incrArr = (arr) => arr.map(n => incr(n))
 
 describe('incrArr', () => {
   it('increments each number in the array', () => {
-    const arr = [1, 2, 3];
-
-    expect(incrArr(arr)).toEqual([2, 3, 4])
+    expect(incrArr([1, 2, 3]))
+      .toEqual([2, 3, 4])
   })
 })
 ```
 
-**Result**: ✅ tests pass!
-
-This is what I see a lot of people do, and it's fine, but there's an untested anonymous function connecting `map` and `incr`. We can improve it by refactoring to:
+This is what I see a lot of people do, and it's fine, but there's an untested anonymous function connecting `map` and `incr`. We can improve our code even further by refactoring `incrArr` to:
 
 ```js
-const incrArr = (arr) => arr.map(incr)
+const incrArr = arr => arr.map(incr)
 ```
-**Result**: ✅ tests pass!
 
-This final implementation is point-free,because we're not defining the arguments that get passed to `incr`. Instead, we're just saying that `incr` will implicitly accept all of the arguments passed in by `map`.
+This final implementation is point-free, because we're not defining the arguments that get passed to `incr`. Instead, we're just saying that `incr` will implicitly accept all of the arguments passed in by `map`.
 
-At first, I found this syntax to be a little confusing because you can't see explicitly which arguments `map` passes to `incr`, but now that I'm used to it, this style is easier to reason about, particularly when considering longer method chains.
+At first, I found this syntax to be a little confusing because you can't see explicitly which arguments `map` passes to `incr`, but now that I'm used to it, I find this style much easier to reason about.
 
-Consider the following:
+This is especially true when considering longer method chains:
 
 ```js
-const transformArr = (arr) => arr
+const transformArr = arr => arr
   .map(n => n + 1)
   .filter(n => n % 2 === 0)
   .reduce((acc, n) => acc + n, 0)
@@ -72,19 +63,19 @@ const transformArr = (arr) => arr
 which we can rewrite as
 
 ```js
-const incr = (number) => number + 1
-const isEven = (number) => number % 2 === 0
-const sum = (acc, number) => acc + number
+const incr = n => n + 1
+const isEven = n => n % 2 === 0
+const sum = n => acc + n
 
-const transformArr = (arr) => arr
+const transformArr = arr => arr
   .map(incr)
   .filter(isEven)
   .reduce(sum, 0)
 ```
 
-Hopefully, it's pretty clear that the point-free style here is much more expressive about the transformations that we're performing. It's also a bonus that because we end up breaking out the anonymous functions into reusable, single-purpose functions which can then be tested in isolation.
+Hopefully, it's pretty clear that the point-free style here is much more expressive about the transformations that we're performing. Beyond expressiveness, we end up breaking out the anonymous functions into single-purpose named functions which can be tested in isolation and reused throughout the application which will help to DRY up our codebase.
 
-Another great candidate for point-free syntax is in promise chains. For example:
+Another great candidate for point-free syntax is a promise chain. For example:
 
 ```js
 fetch('https://jsonplaceholder.typicode.com/todos/1')
@@ -92,7 +83,7 @@ fetch('https://jsonplaceholder.typicode.com/todos/1')
   .then(json => console.log(json))
 ```
 
-In the above example, we could do something like this
+We can go point-free like so:
 
 ```js
 const parseJson = (response) => response.json()
@@ -109,8 +100,8 @@ If we wanted to log results in the middle of a promise chain and then continue t
 ```js
 const parseJson = response => response.json();
 const logAndPassThrough = (todo) => {
-  console.log(todo);
-  return todo;
+  console.log(todo)
+  return todo
 };
 const isCompleted = (todo) => todo.completed
 
