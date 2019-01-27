@@ -116,8 +116,6 @@ fetch("https://jsonplaceholder.typicode.com/todos/1")
   .then(console.log)
 ```
 
-For quick debugging, being able to throw in a logger with minimal keystrokes is pretty great in my opinion.
-
 ### Beyond Method Chaining
 
 These examples are just scratching the surface of how point-free syntax can improve your JavaScript. It really begins to shine when we combine it with currying, partial function application, and function composition.
@@ -134,9 +132,9 @@ const incr = n => n + 1
 const incrArr = map(incr)
 ```
 
-Now, `incrArr` is entirely point-free. It makes no reference to the arguments that it takes. If seems to extreme, you definitely don't have to go beyond eliminating your anonymous functions. The benefit of this approach, though, is that we are able to define new functions simply by composing other functions that we already have.
+Now, `incrArr` is entirely point-free. It makes no reference to the arguments that it takes. If this refactor seems too extreme, you definitely don't have to go beyond eliminating your anonymous functions. The benefit of this approach, though, is that we are able to define new functions simply by composing the functions that we already have.
 
-To see function composition in action, lets revisit our refactored `transformArr` function and apply these same strategies. We left it looking like this:
+To see function composition in action, lets revisit our refactored `transformArr` function and apply these same strategies. As a reminder, we left it looking like this:
 
 ```js
 const incr = n => n + 1
@@ -163,9 +161,9 @@ const sum = (a, b) => a + b
 const incr = sum.bind(null, 1)
 ```
 
-I've used bind to apply a value of `1` to `a` in the function `sum`. This will return a new function `n => sum(1, n)`, which is the same as how we had previously defined `incr`, but you'll notice that `incr` is now point-free 😎.
+I've used `bind` to apply a value of `1` to `a` in the function `sum`. This will return a new function `n => sum(1, n)`, which is identical to how we had previously defined `incr`, but you'll notice that `incr` is now point-free 😎.
 
-It's worth noting that the use of bind for partial-application is [generally discouraged](https://hackernoon.com/partial-application-of-functions-dbe7d9b80760) when writing functional JavaScript, because it gives you the ability to define context (also known as _this_) via that first argument which we passed `null` to. Instead, you should probably use something like [lodash's partial function](https://lodash.com/docs/4.17.11#partial).
+It's worth noting that the use of bind for partial-application is [generally discouraged](https://hackernoon.com/partial-application-of-functions-dbe7d9b80760) when writing functional JavaScript, because it gives you the ability to define context (also known as _this_) via that first `null` argument. Instead, you should probably use something like [lodash's partial function](https://lodash.com/docs/4.17.11#partial).
 
 If we take our refactor to its logical conclusion, we arrive at something like this:
 
