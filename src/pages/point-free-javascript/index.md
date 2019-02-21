@@ -110,7 +110,7 @@ const logAndPassThrough = (todo) => {
 const isCompleted = (todo) => todo.completed
 
 fetch("https://jsonplaceholder.typicode.com/todos/1")
-  .then(response => response.json())
+  .then(parseJson)
   .then(logAndPassThrough)
   .then(isCompleted)
   .then(console.log)
