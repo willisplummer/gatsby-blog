@@ -5,7 +5,7 @@ langs: ['en']
 spoiler: "TDD solves a lot of this"
 ---
 
-I sometimes find myself a little skeptical of kent c dodds' approach to testing react applications, but it can be hard for me to pin down why.
+I sometimes find myself a little skeptical of Kent C Dodds' approach to testing React applications, but it can be hard for me to pin down why. I think it relies a little too heavily on integration testing though I do agree with his guiding principal that we should avoid testing implementation details. I think I just disagree about what constitutes an implementation detail at times.
 
 But I've been thinking a lot recently about the purpose that tests serve. I think that we sometimes overlook or take for granted what exactly they're doing for us.
 
