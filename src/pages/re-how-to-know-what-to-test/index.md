@@ -27,7 +27,7 @@ function arrayify(maybeArray) {
 
 > "Key takeaway: Test use cases, not code."
 
-I've been watching a ton of Gary Bernhardt's videos on [Destroy All Software](https://www.destroyallsoftware.com/) recently, and I seeing how he approaches TDD (Test Driven Development) can provide a good contextual framework for how to ensure that you're testing all the usecases.
+I've been watching a ton of Gary Bernhardt's videos on [Destroy All Software](https://www.destroyallsoftware.com/) recently, and seeing how he approaches TDD (Test Driven Development) can provide a good contextual framework for how to ensure that you're testing all the usecases.
 
 If he were implementing the `arrayify` function, he'd write a test that said, `when given an array it returns the array` and then implement that piece of code:
 
